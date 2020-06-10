@@ -48,5 +48,5 @@
 
 	// Allow for looping on nodes by chaining:
 	// qsa('.foo').forEach(function () {})
-	NodeList.prototype.forEach = Array.prototype.forEach; //TODO probleme ici
+	NodeList.prototype.forEach = Array.prototype.forEach;
 })(window);

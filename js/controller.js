@@ -72,6 +72,7 @@
 	 * Renders all active tasks
 	 */
 	Controller.prototype.showActive = function () {
+		console.log("show Active");
 		const self = this;
 		self.model.read({ completed: false }, function (data) {
 			self.view.render('showEntries', data);

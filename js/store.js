@@ -87,6 +87,28 @@
         for (let i = 0; i < 6; i++) {
      		newId += charset.charAt(Math.floor(Math.random() * charset.length));
 		}
+        // test if newId is already used by a element
+		let idAlreadyUsed = false;
+		for (let i = 0; i < todos.length; i++) {
+			if(todos[i].id === newId){
+				idAlreadyUsed = true;
+				break;
+			}
+		}
+		// if newId is already used we create a newId until its not already used
+        while(idAlreadyUsed){
+			idAlreadyUsed = false;
+			newId = "";
+			for (let i = 0; i < 6; i++) {
+				newId += charset.charAt(Math.floor(Math.random() * charset.length));
+			}
+			for (let i = 0; i < todos.length; i++) {
+				if(todos[i].id === newId){
+					idAlreadyUsed = true;
+					break;
+				}
+			}
+		}
 
 		// If an ID was actually given, find the item and update each property
 		if (id) {
