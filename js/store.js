@@ -80,36 +80,6 @@
 
 		callback = callback || function () {};
 
-		// Generate an ID
-		let newId = "";
-		const charset = "0123456789";
-
-        for (let i = 0; i < 6; i++) {
-     		newId += charset.charAt(Math.floor(Math.random() * charset.length));
-		}
-        // test if newId is already used by a element
-		let idAlreadyUsed = false;
-		for (let i = 0; i < todos.length; i++) {
-			if(todos[i].id === newId){
-				idAlreadyUsed = true;
-				break;
-			}
-		}
-		// if newId is already used we create a newId until its not already used
-        while(idAlreadyUsed){
-			idAlreadyUsed = false;
-			newId = "";
-			for (let i = 0; i < 6; i++) {
-				newId += charset.charAt(Math.floor(Math.random() * charset.length));
-			}
-			for (let i = 0; i < todos.length; i++) {
-				if(todos[i].id === newId){
-					idAlreadyUsed = true;
-					break;
-				}
-			}
-		}
-
 		// If an ID was actually given, find the item and update each property
 		if (id) {
 			for (let i = 0; i < todos.length; i++) {
@@ -124,11 +94,10 @@
 			localStorage[this._dbName] = JSON.stringify(data);
 			callback.call(this, todos);
 		} else {
-
-    		// Assign an ID
-			updateData.id = parseInt(newId);
-
+			// Assign an ID
+			updateData.id  =  Date.now(); // Return the number of milliseconds since 1970/01/01 at 00:00
 			todos.push(updateData);
+
 			localStorage[this._dbName] = JSON.stringify(data);
 			callback.call(this, [updateData]);
 		}
@@ -143,12 +112,7 @@
 	Store.prototype.remove = function (id, callback) {
 		const data = JSON.parse(localStorage[this._dbName]);
 		const todos = data.todos;
-		//let todoId;
-		/*for (let i = 0; i < todos.length; i++) {
-			if (todos[i].id === id) {
-				todoId = todos[i].id;
-			}
-		}*/
+		
 		for (let i = 0; i < todos.length; i++) {
 			if (todos[i].id === id) {
 				todos.splice(i, 1);

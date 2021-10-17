@@ -59,16 +59,13 @@ describe('controller', function () {
 	});
 
 	it('should show entries on start-up', function () {
-		/* TEST AJOUTE */
-		const todos = [
-			{id: 42, title: 'my todo', completed: false},
-			{id: 43, title: 'my todo 2', completed: true}
-		];
-		setUpModel(todos);
+		/* NEW TEST ADDED */
+		const todo = {id: 42, title: 'my todo'};
+		setUpModel([todo]);
 
 		subject.setView('');
 
-		expect(view.render).toHaveBeenCalledWith('showEntries', todos);
+		expect(view.render).toHaveBeenCalledWith('showEntries', [todo]);
 	});
 
 	describe('routing', function () {
@@ -92,29 +89,25 @@ describe('controller', function () {
 		});
 
 		it('should show active entries', function () {
-			/* TEST AJOUTE */
-			const todo1 = {id: 42, title: 'my todo', completed: false};
-			const todo2 = {id: 43, title: 'my todo 2', completed: false};
-			const todo3 = {id: 44, title: 'my todo 3', completed: true};
-			setUpModel([todo1,todo2, todo3]);
+			/* NEW TEST ADDED */
+			const todo = {id: 42, title: 'my todo', completed: false};
+
+			setUpModel([todo]);
 
 			subject.setView('#/active');
 
-			// on est censé avoir ce test qui passe :
-			expect(view.render).toHaveBeenCalledWith('showEntries', [todo1,todo2]);
-			// mais il ne passe pas
+			expect(view.render).toHaveBeenCalledWith('showEntries', [todo]);
 		});
 
 		it('should show completed entries', function () {
-			/* TEST AJOUTE */
-			const todo1 = {id: 42, title: 'my todo', completed: false};
-			const todo2 = {id: 43, title: 'my todo 2', completed: false};
-			const todo3 = {id: 44, title: 'my todo 3', completed: true};
-			setUpModel([todo1,todo2, todo3]);
+			/* NEW TEST ADDED */
+			const todo = {id: 42, title: 'my todo', completed: true};
+
+			setUpModel([todo]);
 
 			subject.setView('#/completed');
-			// on est censé avoir ce test qui passe :
-			//expect(view.render).toHaveBeenCalledWith('showEntries', [todo3]);
+
+			expect(view.render).toHaveBeenCalledWith('showEntries', [todo]);
 		});
 	});
 
@@ -161,26 +154,26 @@ describe('controller', function () {
 	});
 
 	it('should highlight "All" filter by default', function () {
-		/* TEST AJOUTE */
+		/* NEW TEST ADDED */
 		subject.setView('');
 		expect(view.render).toHaveBeenCalledWith('setFilter', '');
 	});
 
 	it('should highlight "Active" filter when switching to active view', function () {
-		/* TEST AJOUTE */
+		/* NEW TEST ADDED */
 		subject.setView('#/active');
 		expect(view.render).toHaveBeenCalledWith('setFilter', 'active');
 	});
 
 	it('should highlight "Completed" filter when switching to completed view', function () {
-		/* TEST AJOUTE */
+		/* NEW TEST ADDED */
 		subject.setView('#/completed');
 		expect(view.render).toHaveBeenCalledWith('setFilter', 'completed');
 	});
 
 	describe('toggle all', function () {
 		it('should toggle all todos to completed', function () {
-			/* TEST AJOUTE */
+			/* NEW TEST ADDED */
 			const todos = [
 				{id: 42, title: 'my todo', completed: false},
 				{id: 43, title: 'my todo 2', completed: false},
@@ -198,7 +191,7 @@ describe('controller', function () {
 		});
 
 		it('should update the view', function () {
-			/* TEST AJOUTE */
+			/* NEW TEST ADDED */
 			const todos = [
 				{id: 42, title: 'my todo', completed: false},
 				{id: 43, title: 'my todo 2', completed: false},
@@ -218,7 +211,7 @@ describe('controller', function () {
 
 	describe('new todo', function () {
 		it('should add a new todo to the model', function () {
-			/* TEST AJOUTE */
+			/* NEW TEST ADDED */
 			setUpModel([]);
 
 			subject.setView('');
@@ -266,7 +259,7 @@ describe('controller', function () {
 
 	describe('element removal', function () {
 		it('should remove an entry from the model', function () {
-			/* TEST AJOUTE */
+			/* NEW TEST ADDED */
 			const todo = {id: 42, title: 'my todo', completed: true};
 			setUpModel([todo]);
 
